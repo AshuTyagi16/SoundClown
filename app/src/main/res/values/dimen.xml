@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Padding -->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">10dp</dimen>
+    <dimen name="padding_large">12dp</dimen>
+
+    <!-- font size -->
+    <dimen name="font_largest">26sp</dimen>
+    <dimen name="font_larger">22sp</dimen>
+    <dimen name="font_large">20sp</dimen>
+    <dimen name="font_medium_large">18sp</dimen>
+    <dimen name="font_normal">16sp</dimen>
+    <dimen name="font_medium_small">14sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_extra_small">10sp</dimen>
+
+    <dimen name="video_view_right_padding">250dp</dimen>
+</resources>

@@ -14,7 +14,7 @@ open class BaseActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         StatusBarUtil.setColorNoTranslucent(
             this,
-            ContextCompat.getColor(this, R.color.colorPrimaryDark)
+            ContextCompat.getColor(this, R.color.black)
         )
     }
 

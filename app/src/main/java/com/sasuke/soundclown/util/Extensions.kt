@@ -5,8 +5,6 @@ import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 
 fun View.hide() {
     this.visibility = View.GONE
@@ -21,4 +19,8 @@ inline fun <reified T : ViewModel> getViewModel(
     viewModelFactory: ViewModelProvider.Factory
 ): T {
     return ViewModelProvider(activity, viewModelFactory)[T::class.java]
+}
+
+fun Int.dpToPx(): Int {
+    return (this * Resources.getSystem().displayMetrics.density).toInt()
 }

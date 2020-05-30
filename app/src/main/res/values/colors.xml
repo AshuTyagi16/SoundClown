@@ -3,4 +3,20 @@
   <color name="colorPrimary">#6200EE</color>
   <color name="colorPrimaryDark">#3700B3</color>
   <color name="colorAccent">#03DAC5</color>
+
+  <!-- Solid -->
+  <color name="black">#ff000000</color>
+  <color name="black_transparent">#cc000000</color>
+  <color name="light_grey">#383838</color>
+  <color name="dark_grey">#212121</color>
+  <color name="darker_grey">#191919</color>
+  <color name="white">#ffffffff</color>
+  <color name="white_translucent">#46FFFFFF</color>
+  <color name="shadow_white">#66ffffff</color>
+  <color name="transparent">#00ffffff</color>
+
+  <!-- Text Colors -->
+  <color name="color_text_primary">@color/white</color>
+  <color name="color_text_secondary">#80ffffff</color>
+  <color name="color_text_disabled">#66ffffff</color>
 </resources>

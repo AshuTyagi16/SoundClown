@@ -1,3 +1,14 @@
 <resources>
-  <string name="app_name">SoundClown</string>
+    <string name="app_name">SoundClown</string>
+
+    <!-- Content Description -->
+    <string name="button">Button</string>
+    <string name="icon">Icon</string>
+    <string name="image">Image</string>
+    <string name="separator">Separator</string>
+
+    <!-- Bottom Nav -->
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="library">Library</string>
 </resources>
