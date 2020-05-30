@@ -11,4 +11,8 @@
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="library">Library</string>
+
+    <!-- Player -->
+    <string name="upnext">Up Next</string>
+    <string name="lyrics">Lyrics</string>
 </resources>

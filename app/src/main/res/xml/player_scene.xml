@@ -6,21 +6,21 @@
         app:constraintSetEnd="@id/expanded"
         app:constraintSetStart="@id/collapsed"
         app:duration="300"
-        app:motionInterpolator="easeInOut">
+        app:motionInterpolator="linear">
 
         <OnSwipe
-            app:dragDirection="dragDown"
+            app:dragDirection="dragUp"
             app:maxAcceleration="200"
+            app:nestedScrollFlags="disablePostScroll"
             app:touchAnchorId="@+id/videoViewContainer"
             app:touchAnchorSide="top" />
 
         <KeyFrameSet>
-            <KeyPosition
-                app:framePosition="50"
-                app:keyPositionType="pathRelative"
-                app:motionTarget="@id/ivSongCover"
-                app:percentX="0.5"
-                app:percentY="0.2" />
+            <!--            <KeyPosition-->
+            <!--                app:framePosition="50"-->
+            <!--                app:keyPositionType="pathRelative"-->
+            <!--                app:motionTarget="@id/ivSongCover"-->
+            <!--                app:percentY="0.2" />-->
 
             <KeyAttribute
                 android:alpha="0"
@@ -34,6 +34,16 @@
 
             <KeyAttribute
                 android:alpha="0"
+                app:framePosition="30"
+                app:motionTarget="@id/btnPlayPause" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="30"
+                app:motionTarget="@id/btnNext" />
+
+            <KeyAttribute
+                android:alpha="0"
                 app:framePosition="60"
                 app:motionTarget="@id/tvSongNameExpanded" />
 
@@ -42,70 +52,220 @@
                 app:framePosition="60"
                 app:motionTarget="@id/tvArtistNameExpanded" />
 
+            <KeyAttribute
+                app:framePosition="70"
+                app:motionTarget="@id/clBottomLayout">
+                <CustomAttribute
+                    app:attributeName="translationY"
+                    app:customDimension="80dp" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                app:framePosition="100"
+                app:motionTarget="@id/clBottomLayout">
+                <CustomAttribute
+                    app:attributeName="translationY"
+                    app:customDimension="0dp" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="60"
+                app:motionTarget="@id/btnLike" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="60"
+                app:motionTarget="@id/btnDislike" />
+
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@id/bottomExpanded"
+        app:constraintSetStart="@id/expanded"
+        app:duration="300"
+        app:motionInterpolator="linear">
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:maxAcceleration="200"
+            app:nestedScrollFlags="disablePostScroll"
+            app:touchAnchorId="@+id/clBottomLayout"
+            app:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="10"
+                app:motionTarget="@id/btnLike" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="10"
+                app:motionTarget="@id/btnDislike" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="10"
+                app:motionTarget="@id/tvSongNameExpanded" />
+
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="10"
+                app:motionTarget="@id/tvArtistNameExpanded" />
+
+            <!--            <KeyPosition-->
+            <!--                app:framePosition="50"-->
+            <!--                app:keyPositionType="pathRelative"-->
+            <!--                app:motionTarget="@id/ivSongCover"-->
+            <!--                app:percentY="0.3" />-->
+
+
         </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/expanded">
 
         <Constraint
+            android:id="@+id/rvSongs"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLyrics" />
+
+        <Constraint
             android:id="@id/videoViewContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="0dp"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toTopOf="@id/clBottomLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@id/ivSongCover"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_marginTop="200dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             android:layout_marginStart="0dp"
+            android:layout_marginTop="150dp"
+            android:translationZ="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/videoViewContainer" />
 
         <Constraint
             android:id="@id/tvSongName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="20dp"
             android:alpha="0"
-            app:layout_constraintBottom_toTopOf="@id/tvArtistName"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:translationZ="2dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ivSongCover" />
+            app:layout_constraintTop_toTopOf="@id/videoViewContainer" />
 
         <Constraint
             android:id="@id/tvArtistName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="80dp"
             android:alpha="0"
-            app:layout_constraintBottom_toBottomOf="@id/ivSongCover"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:translationZ="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSongName" />
 
         <Constraint
             android:id="@+id/tvSongNameExpanded"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:alpha="1"
+            android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="@id/ivSongCover"
             app:layout_constraintStart_toStartOf="@id/ivSongCover"
             app:layout_constraintTop_toBottomOf="@id/ivSongCover" />
 
         <Constraint
             android:id="@+id/tvArtistNameExpanded"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:alpha="1"
+            android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="@id/ivSongCover"
             app:layout_constraintStart_toStartOf="@id/ivSongCover"
             app:layout_constraintTop_toBottomOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/clBottomLayout"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:translationZ="2dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/btnLike"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+            app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+            app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/btnDislike"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+            app:layout_constraintStart_toStartOf="@id/ivSongCover"
+            app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/btnPlayPause"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="30dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+            app:layout_constraintEnd_toStartOf="@id/btnNext"
+            app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+        <Constraint
+            android:id="@+id/btnNext"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+        <Constraint
+            android:id="@+id/bottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:translationY="55dp"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </ConstraintSet>
 
@@ -116,7 +276,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="55dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toTopOf="@id/clBottomLayout"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
@@ -124,50 +285,267 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="12dp"
+            android:translationZ="3dp"
             app:layout_constraintBottom_toBottomOf="@id/videoViewContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/videoViewContainer" />
 
         <Constraint
             android:id="@id/tvSongName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="20dp"
             android:alpha="1"
-            app:layout_constraintBottom_toTopOf="@id/tvArtistName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ivSongCover"
-            app:layout_constraintTop_toTopOf="@id/ivSongCover" />
+            android:translationZ="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/videoViewContainer" />
 
         <Constraint
             android:id="@id/tvArtistName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="80dp"
             android:alpha="1"
-            app:layout_constraintBottom_toBottomOf="@id/ivSongCover"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ivSongCover"
+            android:translationZ="2dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSongName" />
 
         <Constraint
+            android:id="@+id/btnPlayPause"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="30dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+            app:layout_constraintEnd_toStartOf="@id/btnNext"
+            app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+        <Constraint
+            android:id="@+id/btnNext"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+        <Constraint
             android:id="@+id/tvSongNameExpanded"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:alpha="0"
+            android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="@id/ivSongCover"
             app:layout_constraintStart_toStartOf="@id/ivSongCover"
             app:layout_constraintTop_toBottomOf="@id/ivSongCover" />
 
         <Constraint
             android:id="@+id/tvArtistNameExpanded"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:alpha="0"
+            android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="@id/ivSongCover"
             app:layout_constraintStart_toStartOf="@id/ivSongCover"
             app:layout_constraintTop_toBottomOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/clBottomLayout"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:translationZ="2dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/btnLike"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+            app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+            app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/btnDislike"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+            app:layout_constraintStart_toStartOf="@id/ivSongCover"
+            app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/rvSongs"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLyrics" />
+
+        <Constraint
+            android:id="@+id/bottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:translationY="0dp"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/bottomExpanded">
+        <Constraint
+            android:id="@+id/clBottomLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:translationZ="2dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/videoViewContainer" />
+
+        <Constraint
+            android:id="@id/videoViewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toTopOf="@id/clBottomLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/tvSongNameExpanded"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+            app:layout_constraintStart_toStartOf="@id/ivSongCover"
+            app:layout_constraintTop_toBottomOf="@id/ivSongCover" />
+
+        <Constraint
+            android:id="@+id/tvArtistNameExpanded"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+            app:layout_constraintStart_toStartOf="@id/ivSongCover"
+            app:layout_constraintTop_toBottomOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@id/ivSongCover"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="12dp"
+            android:translationZ="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/videoViewContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/videoViewContainer" />
+
+        <Constraint
+            android:id="@+id/btnPlayPause"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="30dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+            app:layout_constraintEnd_toStartOf="@id/btnNext"
+            app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+        <Constraint
+            android:id="@+id/btnNext"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+        <Constraint
+            android:id="@id/tvSongName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="20dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/tvArtistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSongName" />
+
+        <Constraint
+            android:id="@+id/btnLike"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+            app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+            app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/btnDislike"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:alpha="0"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+            app:layout_constraintStart_toStartOf="@id/ivSongCover"
+            app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+        <Constraint
+            android:id="@+id/rvSongs"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:alpha="1"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLyrics" />
+
+        <Constraint
+            android:id="@+id/bottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:translationY="55dp"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </ConstraintSet>
 

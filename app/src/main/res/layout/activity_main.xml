@@ -5,18 +5,221 @@
     android:id="@+id/mainMotionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/main_scene"
-    android:background="@color/black"
+    android:background="@color/darker_grey"
+    app:layoutDescription="@xml/player_scene"
+    app:layout_collapseMode="parallax"
     tools:ignore="contentDescription">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/videoViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="55dp"
+        android:translationZ="2dp"
+        android:padding="@dimen/padding_large"
+        app:layout_constraintBottom_toTopOf="@id/clBottomLayout"
+        tools:background="@color/darker_grey">
+
+        <View
+            android:id="@+id/dummyView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/ivSongCover"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="55dp"
+        android:contentDescription="@string/image"
+        android:elevation="2dp"
+        android:scaleType="fitXY"
+        android:translationZ="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/videoMotionLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/videoMotionLayout"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvSongName"
+        style="@style/Text.Primary.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:gravity="start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/videoViewContainer"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/tvArtistName"
+        style="@style/Text.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:gravity="start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSongName"
+        tools:text="@tools:sample/cities" />
+
+    <ImageView
+        android:id="@+id/btnPlayPause"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="30dp"
+        android:contentDescription="@string/button"
+        android:src="@drawable/ic_play_white"
+        app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+        app:layout_constraintEnd_toStartOf="@id/btnNext"
+        app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+    <ImageView
+        android:id="@+id/btnNext"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/button"
+        android:src="@drawable/ic_next_white"
+        app:layout_constraintBottom_toBottomOf="@id/tvArtistName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvSongName" />
+
+    <TextView
+        android:id="@+id/tvSongNameExpanded"
+        style="@style/Text.Primary.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textSize="@dimen/font_larger"
+        app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+        app:layout_constraintStart_toStartOf="@id/ivSongCover"
+        app:layout_constraintTop_toBottomOf="@id/ivSongCover"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/tvArtistNameExpanded"
+        style="@style/Text.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/color_text_secondary"
+        android:textSize="@dimen/font_medium_small"
+        app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+        app:layout_constraintStart_toStartOf="@id/ivSongCover"
+        app:layout_constraintTop_toBottomOf="@id/tvSongNameExpanded"
+        tools:text="@tools:sample/cities" />
+
+    <ImageView
+        android:id="@+id/btnDislike"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:contentDescription="@string/button"
+        android:src="@drawable/ic_dislike_holo"
+        app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+        app:layout_constraintStart_toStartOf="@id/ivSongCover"
+        app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+    <ImageView
+        android:id="@+id/btnLike"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:contentDescription="@string/button"
+        android:src="@drawable/ic_like_holo"
+        app:layout_constraintBottom_toBottomOf="@id/tvSongNameExpanded"
+        app:layout_constraintEnd_toEndOf="@id/ivSongCover"
+        app:layout_constraintTop_toTopOf="@id/tvSongNameExpanded" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBottomLayout"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:translationZ="2dp"
+        android:descendantFocusability="blocksDescendants"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="@color/black_transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clInner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_translucent"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivScrollHandle"
+                android:layout_width="40dp"
+                android:layout_height="6dp"
+                android:contentDescription="@string/button"
+                android:src="@drawable/fast_scroll_handle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvUpNext"
+                style="@style/Text.Primary.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="@string/upnext"
+                android:textAllCaps="true"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toStartOf="@id/tvLyrics"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLyrics"
+                style="@style/Text.Primary.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:padding="@dimen/padding_small"
+                android:text="@string/lyrics"
+                android:textAllCaps="true"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvUpNext"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSongs"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clInner"
+            tools:itemCount="15"
+            tools:listitem="@layout/cell_song" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenu"
         style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        app:elevation="0dp"
-        android:elevation="0dp"
         android:background="@color/darker_grey"
+        android:elevation="1dp"
+        android:translationZ="1dp"
+        app:elevation="1dp"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Caption"
         app:itemTextAppearanceInactive="@style/TextAppearance.AppCompat.Caption"
@@ -31,7 +234,7 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

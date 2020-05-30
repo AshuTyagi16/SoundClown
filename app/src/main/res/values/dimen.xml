@@ -5,6 +5,8 @@
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_medium">10dp</dimen>
     <dimen name="padding_large">12dp</dimen>
+    <dimen name="padding_larger">16dp</dimen>
+    <dimen name="padding_largest">20dp</dimen>
 
     <!-- font size -->
     <dimen name="font_largest">26sp</dimen>

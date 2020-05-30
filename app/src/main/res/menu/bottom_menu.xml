@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/first"
+        android:id="@+id/home"
         android:icon="@drawable/ic_home_white"
         android:title="@string/home"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/second"
+        android:id="@+id/search"
         android:icon="@drawable/ic_search_white"
         android:title="@string/search"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/third"
+        android:id="@+id/library"
         android:icon="@drawable/ic_library_white"
         android:title="@string/library"
         app:showAsAction="always" />

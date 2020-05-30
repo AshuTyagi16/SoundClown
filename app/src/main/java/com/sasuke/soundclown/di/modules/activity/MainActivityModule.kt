@@ -3,8 +3,8 @@ package com.sasuke.soundclown.di.modules.activity
 import androidx.lifecycle.ViewModel
 import com.sasuke.soundclown.di.mapkey.ViewModelKey
 import com.sasuke.soundclown.di.scopes.PerFragmentScope
-import com.sasuke.soundclown.ui.MainActivityViewModel
-import com.sasuke.soundclown.ui.PlayerFragment
+import com.sasuke.soundclown.ui.DemoFragment
+import com.sasuke.soundclown.ui.player.MainActivityViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -19,7 +19,7 @@ abstract class MainActivityModule {
 
     @PerFragmentScope
     @ContributesAndroidInjector
-    internal abstract fun playerFragment(): PlayerFragment
+    internal abstract fun demoFragment(): DemoFragment
 
     @Binds
     @IntoMap
