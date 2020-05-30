@@ -5,12 +5,12 @@
     <Transition
         app:constraintSetEnd="@id/expanded"
         app:constraintSetStart="@id/collapsed"
-        app:duration="300"
+        app:duration="200"
         app:motionInterpolator="linear">
 
         <OnSwipe
             app:dragDirection="dragUp"
-            app:maxAcceleration="200"
+            app:onTouchUp="autoCompleteToStart"
             app:nestedScrollFlags="disablePostScroll"
             app:touchAnchorId="@+id/videoViewContainer"
             app:touchAnchorSide="top" />
@@ -84,15 +84,16 @@
     <Transition
         app:constraintSetEnd="@id/bottomExpanded"
         app:constraintSetStart="@id/expanded"
-        app:duration="300"
+        app:duration="200"
         app:motionInterpolator="linear">
 
         <OnSwipe
             app:dragDirection="dragUp"
-            app:maxAcceleration="200"
             app:nestedScrollFlags="disablePostScroll"
+            app:onTouchUp="autoComplete"
             app:touchAnchorId="@+id/clBottomLayout"
-            app:touchAnchorSide="top" />
+            app:touchAnchorSide="top"
+            app:touchRegionId="@id/clBottomLayout" />
 
         <KeyFrameSet>
 
@@ -132,7 +133,6 @@
             android:id="@+id/rvSongs"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
             android:alpha="0"
             android:translationZ="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -389,7 +389,6 @@
             android:id="@+id/rvSongs"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
             android:alpha="0"
             android:translationZ="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -529,7 +528,6 @@
             android:id="@+id/rvSongs"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
             android:alpha="1"
             android:translationZ="2dp"
             app:layout_constraintBottom_toBottomOf="parent"

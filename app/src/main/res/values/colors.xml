@@ -12,6 +12,8 @@
   <color name="darker_grey">#191919</color>
   <color name="white">#ffffffff</color>
   <color name="white_translucent">#46FFFFFF</color>
+  <color name="white_overlay">#66000000</color>
+  <color name="bottom_handle_overlay">#33000000</color>
   <color name="shadow_white">#66ffffff</color>
   <color name="transparent">#00ffffff</color>
 

@@ -1,6 +1,7 @@
 package com.sasuke.soundclown.ui.player
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -45,6 +47,8 @@ class MainActivity : BaseActivity(),
 
     private lateinit var adapter: SongAdapter
 
+    private lateinit var layoutManager: LinearLayoutManager
+
     private var dominantColor = Color.BLACK
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,18 +58,19 @@ class MainActivity : BaseActivity(),
         observeLiveData()
         setupListeners()
         getData()
-        loadData()
+        loadData("https://i.pinimg.com/originals/c3/12/16/c31216424b811a9770b5b7dacb06fa3e.jpg")
     }
 
     private fun inject() {
         mainActivityViewModel =
             getViewModel(this, viewModelFactory)
+        layoutManager = LinearLayoutManager(this)
         adapter = SongAdapter(glide)
     }
 
-    private fun loadData() {
+    private fun loadData(url: String) {
         glide
-            .load("https://i.pinimg.com/originals/c3/12/16/c31216424b811a9770b5b7dacb06fa3e.jpg")
+            .load(url)
             .apply(
                 RequestOptions()
                     .format(DecodeFormat.PREFER_ARGB_8888)
@@ -80,8 +85,6 @@ class MainActivity : BaseActivity(),
 
         tvSongNameExpanded.text = "Bhot Tej"
         tvArtistNameExpanded.text = "Fotty Seven"
-
-        adapter = SongAdapter(glide)
     }
 
     private fun getData() {
@@ -119,7 +122,7 @@ class MainActivity : BaseActivity(),
     }
 
     private fun setData(playlist: Playlist) {
-        rvSongs.layoutManager = LinearLayoutManager(this)
+        rvSongs.layoutManager = layoutManager
         rvSongs.adapter = adapter
         adapter.setOnItemClickListener(this)
         adapter.setSongs(playlist.playlists.items)
@@ -135,17 +138,20 @@ class MainActivity : BaseActivity(),
         bottomMenu.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    replaceVideoFragment(R.id.fragmentContainer,
+                    replaceVideoFragment(
+                        R.id.fragmentContainer,
                         DemoFragment.newInstance()
                     )
                 }
                 R.id.search -> {
-                    replaceVideoFragment(R.id.fragmentContainer,
+                    replaceVideoFragment(
+                        R.id.fragmentContainer,
                         DemoFragment.newInstance()
                     )
                 }
                 R.id.library -> {
-                    replaceVideoFragment(R.id.fragmentContainer,
+                    replaceVideoFragment(
+                        R.id.fragmentContainer,
                         DemoFragment.newInstance()
                     )
                 }
@@ -182,7 +188,7 @@ class MainActivity : BaseActivity(),
                                 R.color.darker_grey
                             )
                         )
-                    }else {
+                    } else {
                         videoViewContainer.setBackgroundColor(dominantColor)
                         clBottomLayout.setBackgroundColor(dominantColor)
                     }
@@ -194,10 +200,26 @@ class MainActivity : BaseActivity(),
             }
 
         })
+
+        rvSongs.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
+                    if (!recyclerView.canScrollVertically(-1)) {
+                        Timber.i("DOING TRANSITION")
+                        //TODO: FIX CASE WHERE ANIM DOESNT WORK SOMETIME ON EXPANDING
+                        mainMotionLayout.transitionToState(
+                            R.id.expanded
+                        )
+                    }
+                }
+            }
+        })
     }
 
     @SuppressLint("CheckResult")
     override fun onItemClick(position: Int, item: Item) {
+        loadData(item.images[0].url)
         glide
             .asBitmap()
             .load(item.images[0].url)
