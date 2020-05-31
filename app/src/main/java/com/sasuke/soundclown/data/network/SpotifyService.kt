@@ -1,5 +1,6 @@
 package com.sasuke.soundclown.data.network
 
+import com.sasuke.soundclown.data.model.Category
 import com.sasuke.soundclown.data.model.Playlist
 import com.sasuke.soundclown.data.model.Track
 import retrofit2.Call
@@ -12,4 +13,7 @@ interface SpotifyService {
 
     @GET("v1/browse/categories/edm_dance/playlists")
     fun getPlaylistsForCategory(): Call<Playlist>
+
+    @GET("v1/browse/categories")
+    fun getAllCategories(): Call<Category>
 }

@@ -10,17 +10,23 @@
 
         <OnSwipe
             app:dragDirection="dragUp"
-            app:onTouchUp="autoCompleteToStart"
             app:nestedScrollFlags="disablePostScroll"
+            app:onTouchUp="autoComplete"
             app:touchAnchorId="@+id/videoViewContainer"
-            app:touchAnchorSide="top" />
+            app:touchAnchorSide="top"
+            app:maxVelocity="25"
+            app:maxAcceleration="25"
+            app:touchRegionId="@+id/videoViewContainer" />
 
         <KeyFrameSet>
-            <!--            <KeyPosition-->
-            <!--                app:framePosition="50"-->
-            <!--                app:keyPositionType="pathRelative"-->
-            <!--                app:motionTarget="@id/ivSongCover"-->
-            <!--                app:percentY="0.2" />-->
+            <KeyPosition
+                app:framePosition="10"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/ivSongCover"
+                app:curveFit="spline"
+                app:percentX="0.1"
+                app:transitionEasing="accelerate"
+                app:percentY="0.1" />
 
             <KeyAttribute
                 android:alpha="0"
@@ -91,6 +97,8 @@
             app:dragDirection="dragUp"
             app:nestedScrollFlags="disablePostScroll"
             app:onTouchUp="autoComplete"
+            app:maxVelocity="25"
+            app:maxAcceleration="25"
             app:touchAnchorId="@+id/clBottomLayout"
             app:touchAnchorSide="top"
             app:touchRegionId="@id/clBottomLayout" />

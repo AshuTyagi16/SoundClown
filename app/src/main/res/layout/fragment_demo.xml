@@ -85,4 +85,44 @@
         android:text="@string/button"
         android:textColor="@color/black" />
 
+    <TextView
+        style="@style/Text.Primary.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_largest"
+        android:text="@string/button"
+        android:textColor="@color/black" />
+
+    <TextView
+        style="@style/Text.Primary.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_largest"
+        android:text="@string/button"
+        android:textColor="@color/black" />
+
+    <TextView
+        style="@style/Text.Primary.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_largest"
+        android:text="@string/button"
+        android:textColor="@color/black" />
+
+    <TextView
+        style="@style/Text.Primary.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/padding_largest"
+        android:text="@string/button"
+        android:textColor="@color/black" />
+
 </LinearLayout>

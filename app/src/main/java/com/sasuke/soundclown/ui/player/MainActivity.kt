@@ -27,6 +27,7 @@ import com.sasuke.soundclown.data.model.Playlist
 import com.sasuke.soundclown.data.model.Status
 import com.sasuke.soundclown.ui.DemoFragment
 import com.sasuke.soundclown.ui.base.BaseActivity
+import com.sasuke.soundclown.ui.home.HomeFragment
 import com.sasuke.soundclown.util.dpToPx
 import com.sasuke.soundclown.util.getViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -140,7 +141,7 @@ class MainActivity : BaseActivity(),
                 R.id.home -> {
                     replaceVideoFragment(
                         R.id.fragmentContainer,
-                        DemoFragment.newInstance()
+                        HomeFragment.newInstance()
                     )
                 }
                 R.id.search -> {
@@ -244,5 +245,13 @@ class MainActivity : BaseActivity(),
                 }
 
             })
+    }
+
+    override fun onBackPressed() {
+        when (mainMotionLayout.currentState) {
+            R.id.expanded -> mainMotionLayout.transitionToState(R.id.collapsed)
+            R.id.bottomExpanded -> mainMotionLayout.transitionToState(R.id.expanded)
+            else -> super.onBackPressed()
+        }
     }
 }

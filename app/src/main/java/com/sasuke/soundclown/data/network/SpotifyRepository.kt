@@ -1,5 +1,6 @@
 package com.sasuke.soundclown.data.network
 
+import com.sasuke.soundclown.data.model.Category
 import com.sasuke.soundclown.data.model.CustomError
 import com.sasuke.soundclown.data.model.Playlist
 import com.sasuke.soundclown.data.model.Track
@@ -34,6 +35,19 @@ class SpotifyRepository(private val spotifyService: SpotifyService) {
         })
     }
 
+    fun getAllCategories(onGetAllCategoriesListener: OnGetAllCategoriesListener) {
+        spotifyService.getAllCategories().enqueue(object : ApiCallback<Category>() {
+            override fun success(response: Category) {
+                onGetAllCategoriesListener.onGetAllCategoriesSuccess(response)
+            }
+
+            override fun failure(error: CustomError) {
+                onGetAllCategoriesListener.onGetAllCategoriesFailure(error)
+            }
+
+        })
+    }
+
     interface OnGetTracksListener {
         fun onGetTracksSuccess(track: Track)
         fun onGetTracksFailure(error: CustomError)
@@ -42,5 +56,10 @@ class SpotifyRepository(private val spotifyService: SpotifyService) {
     interface OnGetPlaylistsForCategoryListener {
         fun onGetPlaylistsForCategorySuccess(playlist: Playlist)
         fun onGetPlaylistsForCategoryFailure(error: CustomError)
+    }
+
+    interface OnGetAllCategoriesListener {
+        fun onGetAllCategoriesSuccess(category: Category)
+        fun onGetAllCategoriesFailure(error: CustomError)
     }
 }
