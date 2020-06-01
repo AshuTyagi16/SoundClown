@@ -2,11 +2,11 @@ package com.sasuke.soundclown.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Playlists(
+data class Albums(
     @SerializedName("href")
     val href: String,
-    @SerializedName("items")
-    val playlistItemList: ArrayList<ItemPlaylist>,
+    @SerializedName("item")
+    val itemAlbumsList: ArrayList<ItemAlbum>,
     @SerializedName("limit")
     val limit: Int,
     @SerializedName("next")

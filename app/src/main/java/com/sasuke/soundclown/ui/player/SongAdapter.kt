@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.sasuke.soundclown.R
-import com.sasuke.soundclown.data.model.Item
+import com.sasuke.soundclown.data.model.ItemPlaylist
 
 class SongAdapter(private val glide: RequestManager) : RecyclerView.Adapter<SongViewHolder>(),
     SongViewHolder.OnItemClickListener {
 
-    private lateinit var albums: List<Item>
+    private lateinit var albums: ArrayList<ItemPlaylist>
     private lateinit var onItemClickListener: OnItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
@@ -30,22 +30,22 @@ class SongAdapter(private val glide: RequestManager) : RecyclerView.Adapter<Song
         }
     }
 
-    fun setSongs(list: List<Item>) {
+    fun setSongs(list: ArrayList<ItemPlaylist>) {
         this.albums = list
         notifyDataSetChanged()
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, item: Item)
+        fun onItemClick(position: Int, itemPlaylist: ItemPlaylist)
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
 
-    override fun onItemClick(position: Int, item: Item) {
+    override fun onItemClick(position: Int, itemPlaylist: ItemPlaylist) {
         if (::onItemClickListener.isInitialized)
-            onItemClickListener.onItemClick(position, item)
+            onItemClickListener.onItemClick(position, itemPlaylist)
     }
 
 }

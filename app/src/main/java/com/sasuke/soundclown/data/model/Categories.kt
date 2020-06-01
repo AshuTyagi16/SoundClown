@@ -2,17 +2,17 @@ package com.sasuke.soundclown.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Playlists(
+data class Categories(
     @SerializedName("href")
     val href: String,
     @SerializedName("items")
-    val playlistItemList: ArrayList<ItemPlaylist>,
+    val itemCategories: ArrayList<ItemCategories>,
     @SerializedName("limit")
     val limit: Int,
     @SerializedName("next")
-    val next: Any,
+    val next: String,
     @SerializedName("offset")
-    val offset: Int,
+    val offSet: Int,
     @SerializedName("previous")
     val previous: Any,
     @SerializedName("total")

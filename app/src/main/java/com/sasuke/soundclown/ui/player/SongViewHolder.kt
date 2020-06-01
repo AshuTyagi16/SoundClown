@@ -5,7 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.sasuke.soundclown.R
-import com.sasuke.soundclown.data.model.Item
+import com.sasuke.soundclown.data.model.ItemPlaylist
 import kotlinx.android.synthetic.main.cell_song.view.*
 
 class SongViewHolder(itemView: View, private val glide: RequestManager) :
@@ -13,10 +13,10 @@ class SongViewHolder(itemView: View, private val glide: RequestManager) :
 
     private lateinit var onItemClickListener: OnItemClickListener
 
-    fun setSong(item: Item) {
-        glide.load(item.images[0].url).into(itemView.ivSongCover)
-        itemView.tvSongName.text = item.name
-        itemView.tvArtistName.text = item.owner.display_name
+    fun setSong(itemPlaylist: ItemPlaylist) {
+        glide.load(itemPlaylist.imageList[0].url).into(itemView.ivSongCover)
+        itemView.tvSongName.text = itemPlaylist.name
+        itemView.tvArtistName.text = itemPlaylist.owner.displayName
 
         itemView.setOnClickListener {
             itemView.setBackgroundColor(
@@ -26,12 +26,12 @@ class SongViewHolder(itemView: View, private val glide: RequestManager) :
                 )
             )
             if (::onItemClickListener.isInitialized)
-                onItemClickListener.onItemClick(adapterPosition, item)
+                onItemClickListener.onItemClick(adapterPosition, itemPlaylist)
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, item: Item)
+        fun onItemClick(position: Int, itemPlaylist: ItemPlaylist)
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {

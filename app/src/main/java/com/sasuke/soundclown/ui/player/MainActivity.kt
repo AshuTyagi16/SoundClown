@@ -1,7 +1,6 @@
 package com.sasuke.soundclown.ui.player
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -22,8 +21,8 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.sasuke.soundclown.R
-import com.sasuke.soundclown.data.model.Item
-import com.sasuke.soundclown.data.model.Playlist
+import com.sasuke.soundclown.data.model.ItemPlaylist
+import com.sasuke.soundclown.data.model.PlaylistResponse
 import com.sasuke.soundclown.data.model.Status
 import com.sasuke.soundclown.ui.DemoFragment
 import com.sasuke.soundclown.ui.base.BaseActivity
@@ -58,7 +57,7 @@ class MainActivity : BaseActivity(),
         observeLiveData()
         setupListeners()
         getData()
-        loadData("https://i.pinimg.com/originals/c3/12/16/c31216424b811a9770b5b7dacb06fa3e.jpg")
+        loadData("https://images.genius.com/495a29bfaf1daac2fc3ced087983b3d1.1000x1000x1.jpg")
     }
 
     private fun inject() {
@@ -80,31 +79,18 @@ class MainActivity : BaseActivity(),
             .into(ivSongCover)
 
 
-        tvSongName.text = "Bhot Tej"
-        tvArtistName.text = "Fotty Seven"
+        tvSongName.text = "Youngblood"
+        tvArtistName.text = "5SOS"
 
-        tvSongNameExpanded.text = "Bhot Tej"
-        tvArtistNameExpanded.text = "Fotty Seven"
+        tvSongNameExpanded.text = "Youngblood"
+        tvArtistNameExpanded.text = "5SOS"
     }
 
     private fun getData() {
-        mainActivityViewModel.getPlaylistsForCategory()
+        mainActivityViewModel.getPlaylistsForCategory("pop")
     }
 
     private fun observeLiveData() {
-        mainActivityViewModel.trackLiveData.observe(this, Observer {
-            when (it.status) {
-                Status.LOADING -> {
-                    Timber.i("LOADING")
-                }
-                Status.SUCCESS -> {
-                    Timber.i("SUCCESS")
-                }
-                Status.ERROR -> {
-                    Timber.i("ERROR")
-                }
-            }
-        })
 
         mainActivityViewModel.playlistLiveData.observe(this, Observer {
             when (it.status) {
@@ -121,11 +107,11 @@ class MainActivity : BaseActivity(),
         })
     }
 
-    private fun setData(playlist: Playlist) {
+    private fun setData(playlistResponse: PlaylistResponse) {
         rvSongs.layoutManager = layoutManager
         rvSongs.adapter = adapter
         adapter.setOnItemClickListener(this)
-        adapter.setSongs(playlist.playlists.items)
+        adapter.setSongs(playlistResponse.playlists.playlistItemList)
     }
 
     private fun replaceVideoFragment(container: Int, fragment: Fragment) {
@@ -218,11 +204,11 @@ class MainActivity : BaseActivity(),
     }
 
     @SuppressLint("CheckResult")
-    override fun onItemClick(position: Int, item: Item) {
-        loadData(item.images[0].url)
+    override fun onItemClick(position: Int, itemPlaylist: ItemPlaylist) {
+        loadData(itemPlaylist.imageList[0].url)
         glide
             .asBitmap()
-            .load(item.images[0].url)
+            .load(itemPlaylist.imageList[0].url)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
 
