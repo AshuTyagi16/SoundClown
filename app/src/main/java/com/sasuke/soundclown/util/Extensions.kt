@@ -6,11 +6,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-fun View.hide() {
+fun View.gone() {
     this.visibility = View.GONE
 }
 
-fun View.show() {
+fun View.visible() {
     this.visibility = View.VISIBLE
 }
 

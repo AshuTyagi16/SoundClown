@@ -1,4 +1,4 @@
-package com.sasuke.soundclown.ui.player
+package com.sasuke.soundclown.ui.category_details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,22 +9,20 @@ import com.sasuke.soundclown.data.model.Resource
 import com.sasuke.soundclown.data.network.SpotifyRepository
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(
+class CategoryDetailsViewModel @Inject constructor(
     private val spotifyRepository: SpotifyRepository
-) : ViewModel(),
-    SpotifyRepository.OnGetPlaylistsForCategoryListener {
+) : ViewModel(), SpotifyRepository.OnGetPlaylistsForCategoryListener {
 
     private val _playlistLiveData = MutableLiveData<Resource<PlaylistResponse>>()
     val playlistLiveData: LiveData<Resource<PlaylistResponse>>
         get() = _playlistLiveData
 
-    fun getPlaylistsForCategory(categoryId: String) {
+    fun getCategoryPlaylist(categoryId: String) {
         _playlistLiveData.postValue(Resource.loading())
         spotifyRepository.getPlaylistsForCategory(categoryId, this)
     }
 
     override fun onGetPlaylistsForCategorySuccess(playlistResponse: PlaylistResponse) {
-
         _playlistLiveData.postValue(Resource.success(playlistResponse))
     }
 

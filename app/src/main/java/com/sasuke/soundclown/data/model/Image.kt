@@ -3,10 +3,10 @@ package com.sasuke.soundclown.data.model
 import com.google.gson.annotations.SerializedName
 
 data class Image(
-    @SerializedName("href")
+    @SerializedName("height")
     val height: Float,
     @SerializedName("href")
     val url: String,
-    @SerializedName("href")
+    @SerializedName("width")
     val width: Float
 )

@@ -1,6 +1,8 @@
 package com.sasuke.soundclown.data.network
 
 import com.sasuke.soundclown.data.model.*
+import com.sasuke.soundclown.data.model.Category
+import com.sasuke.soundclown.data.model.CustomError
 import com.sasuke.soundclown.util.ApiCallback
 
 
@@ -21,6 +23,7 @@ class SpotifyRepository(private val spotifyService: SpotifyService) {
 
             })
     }
+
     fun getPlaylistsForCategory(
         categoryId: String,
         onGetPlaylistsForCategoryListener: OnGetPlaylistsForCategoryListener
@@ -37,6 +40,7 @@ class SpotifyRepository(private val spotifyService: SpotifyService) {
 
             })
     }
+
     fun getCategoryById(
         categoryId: String,
         onGetCategoryByIdListener: OnGetCategoryByIdListener
@@ -132,3 +136,4 @@ class SpotifyRepository(private val spotifyService: SpotifyService) {
 //        fun onGetTracksFailure(error: CustomError)
 //    }
 }
+

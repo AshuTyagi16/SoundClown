@@ -14,4 +14,6 @@ object Constants {
     const val HEADER_BEARER = "Bearer "
 
     const val FAKE_TOKEN = "BQAJzAxTBs_bNNlSvU1YBM-tnsxtxKpX-G-bJGtA1xlFefeNR361dxVyCYAQCETCgRp5WbX-Lnk5uO7OX9g"
+
+    const val CATEGORY_SPAN_COUNT = 2
 }

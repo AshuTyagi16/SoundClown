@@ -14,7 +14,7 @@ data class ItemPlaylist(
     @SerializedName("id")
     val id: String,
     @SerializedName("images")
-    val imageList: ArrayList<Image>,
+    val imageList: ArrayList<Icon>,
     @SerializedName("name")
     val name: String,
     @SerializedName("owner")

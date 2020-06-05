@@ -2,10 +2,11 @@
 <resources>
 
     <!-- Padding -->
+    <dimen name="padding_micro">4dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_medium">10dp</dimen>
-    <dimen name="padding_large">12dp</dimen>
-    <dimen name="padding_larger">16dp</dimen>
+    <dimen name="padding_normal">12dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
     <dimen name="padding_largest">20dp</dimen>
 
     <!-- font size -->

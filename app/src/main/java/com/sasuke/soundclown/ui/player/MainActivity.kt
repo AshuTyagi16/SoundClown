@@ -26,6 +26,8 @@ import com.sasuke.soundclown.data.model.PlaylistResponse
 import com.sasuke.soundclown.data.model.Status
 import com.sasuke.soundclown.ui.DemoFragment
 import com.sasuke.soundclown.ui.base.BaseActivity
+import com.sasuke.soundclown.ui.category_details.CategoryDetailsFragment
+import com.sasuke.soundclown.ui.search.SearchFragment
 import com.sasuke.soundclown.util.dpToPx
 import com.sasuke.soundclown.util.getViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,21 +36,23 @@ import java.lang.Math.abs
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(),
-    SongAdapter.OnItemClickListener {
+    SongAdapter.OnItemClickListener, SearchFragment.OnCategoryItemClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var mainActivityViewModel: MainActivityViewModel
-
     @Inject
     lateinit var glide: RequestManager
+
+    private lateinit var mainActivityViewModel: MainActivityViewModel
 
     private lateinit var adapter: SongAdapter
 
     private lateinit var layoutManager: LinearLayoutManager
 
     private var dominantColor = Color.BLACK
+    private lateinit var searchFragment: SearchFragment
+    private lateinit var categoryDetailsFragment: CategoryDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +69,7 @@ class MainActivity : BaseActivity(),
             getViewModel(this, viewModelFactory)
         layoutManager = LinearLayoutManager(this)
         adapter = SongAdapter(glide)
+        searchFragment = SearchFragment.newInstance()
     }
 
     private fun loadData(url: String) {
@@ -88,6 +93,7 @@ class MainActivity : BaseActivity(),
 
     private fun getData() {
         mainActivityViewModel.getPlaylistsForCategory("pop")
+        searchFragment.setOnCategoryItemClickListener(this)
     }
 
     private fun observeLiveData() {
@@ -114,7 +120,7 @@ class MainActivity : BaseActivity(),
         adapter.setSongs(playlistResponse.playlists.playlistItemList)
     }
 
-    private fun replaceVideoFragment(container: Int, fragment: Fragment) {
+    private fun replaceFragment(container: Int, fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(container, fragment)
             .commit()
@@ -124,19 +130,20 @@ class MainActivity : BaseActivity(),
         bottomMenu.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
-                    replaceVideoFragment(
+                    replaceFragment(
                         R.id.fragmentContainer,
                         DemoFragment.newInstance()
                     )
                 }
                 R.id.search -> {
-                    replaceVideoFragment(
-                        R.id.fragmentContainer,
-                        DemoFragment.newInstance()
-                    )
+                    if (::searchFragment.isInitialized)
+                        replaceFragment(
+                            R.id.fragmentContainer,
+                            searchFragment
+                        )
                 }
                 R.id.library -> {
-                    replaceVideoFragment(
+                    replaceFragment(
                         R.id.fragmentContainer,
                         DemoFragment.newInstance()
                     )
@@ -230,5 +237,22 @@ class MainActivity : BaseActivity(),
                 }
 
             })
+    }
+
+    override fun onBackPressed() {
+        when (mainMotionLayout.currentState) {
+            R.id.expanded -> mainMotionLayout.transitionToState(R.id.collapsed)
+            R.id.bottomExpanded -> mainMotionLayout.transitionToState(R.id.expanded)
+            else -> super.onBackPressed()
+        }
+    }
+
+    override fun onSearchedCategoryClicked(
+        categoryId: String,
+        categoryName: String,
+        position: Int
+    ) {
+        categoryDetailsFragment = CategoryDetailsFragment.newInstance(categoryId, categoryName)
+        replaceFragment(R.id.fragmentContainer, categoryDetailsFragment)
     }
 }
