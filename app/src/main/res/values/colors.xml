@@ -21,4 +21,6 @@
   <color name="color_text_primary">@color/white</color>
   <color name="color_text_secondary">#80ffffff</color>
   <color name="color_text_disabled">#66ffffff</color>
+  <color name="text_red">#952D2D</color>
+  <color name="text_green">#208020</color>
 </resources>

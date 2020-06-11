@@ -36,7 +36,8 @@ import java.lang.Math.abs
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(),
-    SongAdapter.OnItemClickListener, SearchFragment.OnCategoryItemClickListener {
+    SongAdapter.OnItemClickListener, SearchFragment.OnCategoryItemClickListener,
+    CategoryDetailsFragment.OnCategoryDetailsItemClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -123,6 +124,18 @@ class MainActivity : BaseActivity(),
     private fun replaceFragment(container: Int, fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(container, fragment)
+            .commit()
+    }
+
+    private fun addFragment(container: Int, fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .add(container, fragment)
+            .commit()
+    }
+
+    private fun removeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .remove(fragment)
             .commit()
     }
 
@@ -253,6 +266,17 @@ class MainActivity : BaseActivity(),
         position: Int
     ) {
         categoryDetailsFragment = CategoryDetailsFragment.newInstance(categoryId, categoryName)
-        replaceFragment(R.id.fragmentContainer, categoryDetailsFragment)
+        categoryDetailsFragment.setOnCategoryDetailsItemClickListener(this)
+        addFragment(R.id.fragmentContainer, categoryDetailsFragment)
+
+    }
+
+    override fun onCategoryClicked() {
+
+    }
+
+    override fun onRemoveCategoryDetailsFragment() {
+        if (::categoryDetailsFragment.isInitialized)
+            removeFragment(categoryDetailsFragment)
     }
 }

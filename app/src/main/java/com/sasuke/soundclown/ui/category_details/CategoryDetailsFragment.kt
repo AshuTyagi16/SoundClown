@@ -57,6 +57,7 @@ class CategoryDetailsFragment : BaseFragment(),
         getArgument()
         initialiseLayout()
         getData()
+        setClickListeners()
         observeLiveData()
     }
 
@@ -91,6 +92,13 @@ class CategoryDetailsFragment : BaseFragment(),
             categoryDetailsViewModel.getCategoryPlaylist(categoryId)
     }
 
+    private fun setClickListeners() {
+        ivBack.setOnClickListener {
+            if (::onCategoryDetailsItemClickListener.isInitialized)
+                onCategoryDetailsItemClickListener.onRemoveCategoryDetailsFragment()
+        }
+    }
+
     private fun observeLiveData() {
         categoryDetailsViewModel.playlistLiveData.observe(viewLifecycleOwner, Observer {
             when (it.status) {
@@ -113,16 +121,17 @@ class CategoryDetailsFragment : BaseFragment(),
         })
     }
 
-
     fun setOnCategoryDetailsItemClickListener(onCategoryItemClickListener: OnCategoryDetailsItemClickListener) {
         this.onCategoryDetailsItemClickListener = onCategoryItemClickListener
     }
 
     interface OnCategoryDetailsItemClickListener {
-        fun onCategoryClicked(categoryId: String, categoryName: String, position: Int)
+        fun onCategoryClicked()
+        fun onRemoveCategoryDetailsFragment()
     }
 
     override fun onCategoryDetailsClicked() {
-
+        if (::onCategoryDetailsItemClickListener.isInitialized)
+            onCategoryDetailsItemClickListener.onCategoryClicked()
     }
 }
