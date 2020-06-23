@@ -14,7 +14,8 @@
     <string name="search_hint">Artist, songs, or podcasts</string>
 
     <string name="popular_playlist">Popular Playlist</string>
-    <string name="ok">Ok</string>
+    <string name="play">Play</string>
+    <string name="ok">OK</string>
     <!-- Player -->
     <string name="upnext">Up Next</string>
     <string name="lyrics">Lyrics</string>

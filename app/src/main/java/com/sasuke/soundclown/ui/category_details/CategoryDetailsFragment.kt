@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sasuke.soundclown.R
-import com.sasuke.soundclown.data.model.Status
+import com.sasuke.soundclown.data.model.network_models.Status
 import com.sasuke.soundclown.ui.base.BaseFragment
 import com.sasuke.soundclown.ui.base.ItemDecorator
 import com.sasuke.soundclown.util.gone
@@ -126,12 +126,20 @@ class CategoryDetailsFragment : BaseFragment(),
     }
 
     interface OnCategoryDetailsItemClickListener {
-        fun onCategoryClicked()
+        fun onCategoryClicked(
+            playlistId: String,
+            playlistName: String,
+            playlistImageUrl: String
+        )
         fun onRemoveCategoryDetailsFragment()
     }
 
-    override fun onCategoryDetailsClicked() {
+    override fun onCategoryDetailsClicked(
+        playlistId: String,
+        playlistName: String,
+        playlistImageUrl: String
+    ) {
         if (::onCategoryDetailsItemClickListener.isInitialized)
-            onCategoryDetailsItemClickListener.onCategoryClicked()
+            onCategoryDetailsItemClickListener.onCategoryClicked(playlistId,playlistName, playlistImageUrl)
     }
 }

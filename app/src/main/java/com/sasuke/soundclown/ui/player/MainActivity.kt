@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.palette.graphics.Palette
@@ -23,11 +24,12 @@ import com.bumptech.glide.request.transition.Transition
 import com.sasuke.soundclown.R
 import com.sasuke.soundclown.data.model.ItemPlaylist
 import com.sasuke.soundclown.data.model.PlaylistResponse
-import com.sasuke.soundclown.data.model.Status
+import com.sasuke.soundclown.data.model.network_models.Status
 import com.sasuke.soundclown.ui.DemoFragment
 import com.sasuke.soundclown.ui.base.BaseActivity
 import com.sasuke.soundclown.ui.category_details.CategoryDetailsFragment
 import com.sasuke.soundclown.ui.search.SearchFragment
+import com.sasuke.soundclown.ui.tracks_playlist.PlaylistTracksFragment
 import com.sasuke.soundclown.util.dpToPx
 import com.sasuke.soundclown.util.getViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,6 +56,7 @@ class MainActivity : BaseActivity(),
     private var dominantColor = Color.BLACK
     private lateinit var searchFragment: SearchFragment
     private lateinit var categoryDetailsFragment: CategoryDetailsFragment
+    private lateinit var playlistTracksFragment: PlaylistTracksFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,16 +130,15 @@ class MainActivity : BaseActivity(),
             .commit()
     }
 
-    private fun addFragment(container: Int, fragment: Fragment) {
+    private fun addFragmentToBackStack(container: Int, fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+            .addToBackStack(fragment.tag)
             .add(container, fragment)
             .commit()
     }
 
-    private fun removeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .remove(fragment)
-            .commit()
+    private fun popFragmentFromBackStack(fragment: Fragment) {
+        supportFragmentManager.popBackStack(fragment.tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
     private fun setupListeners() {
@@ -267,16 +269,21 @@ class MainActivity : BaseActivity(),
     ) {
         categoryDetailsFragment = CategoryDetailsFragment.newInstance(categoryId, categoryName)
         categoryDetailsFragment.setOnCategoryDetailsItemClickListener(this)
-        addFragment(R.id.fragmentContainer, categoryDetailsFragment)
+        addFragmentToBackStack(R.id.fragmentContainer, categoryDetailsFragment)
 
     }
 
-    override fun onCategoryClicked() {
-
+    override fun onCategoryClicked(
+        playlistId: String,
+        playlistName: String,
+        playlistImageUrl: String
+    ) {
+        playlistTracksFragment = PlaylistTracksFragment.newInstance(playlistId,playlistName, playlistImageUrl)
+        addFragmentToBackStack(R.id.fragmentContainer, playlistTracksFragment)
     }
 
     override fun onRemoveCategoryDetailsFragment() {
         if (::categoryDetailsFragment.isInitialized)
-            removeFragment(categoryDetailsFragment)
+            popFragmentFromBackStack(categoryDetailsFragment)
     }
 }

@@ -1,6 +1,7 @@
 package com.sasuke.soundclown.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.sasuke.soundclown.data.model.commons.Icon
 
 data class ItemCategories(
     @SerializedName("href")

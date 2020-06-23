@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sasuke.soundclown.data.model.BrowseCategory
-import com.sasuke.soundclown.data.model.Category
-import com.sasuke.soundclown.data.model.CustomError
-import com.sasuke.soundclown.data.model.Resource
+import com.sasuke.soundclown.data.model.network_models.CustomError
+import com.sasuke.soundclown.data.model.network_models.Resource
 import com.sasuke.soundclown.data.network.SpotifyRepository
 import javax.inject.Inject
 

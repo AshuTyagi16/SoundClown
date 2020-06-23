@@ -32,7 +32,7 @@ class CategoryDetailsAdapter(private val glide: RequestManager) :
     }
 
     override fun onBindViewHolder(holder: CategoryDetailsViewHolder, position: Int) {
-        if (::playlistItemList.isInitialized){
+        if (::playlistItemList.isInitialized) {
             holder.setItem(playlistItemList[position])
             holder.setOnCategoryItemClickListener(this)
         }
@@ -43,11 +43,19 @@ class CategoryDetailsAdapter(private val glide: RequestManager) :
     }
 
     interface OnCategoryDetailsItemClickListener {
-        fun onCategoryDetailsClicked()
+        fun onCategoryDetailsClicked(
+            playlistId: String,
+            playlistName: String,
+            playlistImageUrl: String
+        )
     }
 
-    override fun onCategoryDetailsClicked() {
+    override fun onCategoryDetailsClicked(
+        playlistId: String,
+        playlistName: String,
+        playlistImageUrl: String
+    ) {
         if (::onCategoryDetailsItemClickListener.isInitialized)
-            onCategoryDetailsItemClickListener.onCategoryDetailsClicked()
+            onCategoryDetailsItemClickListener.onCategoryDetailsClicked(playlistId,playlistName, playlistImageUrl)
     }
 }

@@ -1,4 +1,4 @@
-package com.sasuke.soundclown.data.model
+package com.sasuke.soundclown.data.model.commons
 
 import com.google.gson.annotations.SerializedName
 

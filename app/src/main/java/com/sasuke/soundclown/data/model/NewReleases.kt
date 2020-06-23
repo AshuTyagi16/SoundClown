@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class NewReleases(
     @SerializedName("albums")
-    val albums: Albums
+    val newReleaseAlbums: NewReleaseAlbums
 )

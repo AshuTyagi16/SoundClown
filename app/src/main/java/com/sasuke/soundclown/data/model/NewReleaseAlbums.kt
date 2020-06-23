@@ -2,7 +2,7 @@ package com.sasuke.soundclown.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Albums(
+data class NewReleaseAlbums(
     @SerializedName("href")
     val href: String,
     @SerializedName("item")

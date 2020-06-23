@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_large"
+    android:padding="@dimen/padding_medium"
     tools:background="@color/black_transparent">
 
     <ImageView
@@ -23,9 +23,12 @@
         style="@style/Text.Primary.Bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="@dimen/padding_medium"
+        android:layout_marginEnd="@dimen/padding_medium"
+        android:gravity="start|center_vertical"
+        android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@id/tvArtistName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivFavourite"
         app:layout_constraintStart_toEndOf="@id/ivSongCover"
         app:layout_constraintTop_toTopOf="@id/ivSongCover"
         tools:text="@tools:sample/full_names" />
@@ -35,10 +38,47 @@
         style="@style/Text.Primary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="@dimen/padding_medium"
+        android:layout_marginEnd="@dimen/padding_medium"
+        android:gravity="start|center_vertical"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="@id/ivSongCover"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivFavourite"
         app:layout_constraintStart_toEndOf="@id/ivSongCover"
         app:layout_constraintTop_toBottomOf="@id/tvSongName"
         tools:text="@tools:sample/cities" />
+
+    <ImageView
+        android:id="@+id/ivMoreOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_more_option"
+        android:layout_margin="@dimen/padding_micro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivHidden"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_hidden"
+        android:padding="@dimen/padding_nano"
+        android:layout_margin="@dimen/padding_micro"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivMoreOptions"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFavourite"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_favorite_hollow"
+        android:layout_margin="@dimen/padding_micro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivHidden"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

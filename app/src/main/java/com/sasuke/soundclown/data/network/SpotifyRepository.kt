@@ -1,8 +1,8 @@
 package com.sasuke.soundclown.data.network
 
 import com.sasuke.soundclown.data.model.*
-import com.sasuke.soundclown.data.model.Category
-import com.sasuke.soundclown.data.model.CustomError
+import com.sasuke.soundclown.data.model.network_models.CustomError
+import com.sasuke.soundclown.data.model.playlist_tracks.PlaylistTracksResponse
 import com.sasuke.soundclown.util.ApiCallback
 
 
@@ -90,6 +90,23 @@ class SpotifyRepository(private val spotifyService: SpotifyService) {
             })
     }
 
+    fun getPlaylistTracksById(
+        playlistId: String,
+        onGetPlaylistTracksListener: OnGetPlaylistTracksListener
+    ) {
+        spotifyService.getPlaylistTracksById(playlistId)
+            .enqueue(object : ApiCallback<PlaylistTracksResponse>() {
+                override fun success(response: PlaylistTracksResponse) {
+                    onGetPlaylistTracksListener.onGetPlaylistTracksSuccess(response)
+                }
+
+                override fun failure(error: CustomError) {
+                    onGetPlaylistTracksListener.onGetPlaylistTracksFailure(error)
+                }
+
+            })
+    }
+
 
 //    fun getTracks(onGetTracksListener: OnGetTracksListener) {
 //        spotifyService.getTracks().enqueue(object : ApiCallback<Track>() {
@@ -129,6 +146,11 @@ class SpotifyRepository(private val spotifyService: SpotifyService) {
     interface OnGetNewReleasesListener {
         fun onGetNewReleasesSuccess(newReleases: NewReleases)
         fun onGetNewReleasesFailure(error: CustomError)
+    }
+
+    interface OnGetPlaylistTracksListener {
+        fun onGetPlaylistTracksSuccess(playlistTracksResponse: PlaylistTracksResponse)
+        fun onGetPlaylistTracksFailure(error: CustomError)
     }
 
     //    interface OnGetTracksListener {

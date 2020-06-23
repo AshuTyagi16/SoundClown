@@ -1,6 +1,6 @@
 package com.sasuke.soundclown.data.network
 
-import com.sasuke.soundclown.data.model.Authentication
+import com.sasuke.soundclown.data.model.network_models.Authentication
 import retrofit2.Call
 import retrofit2.http.*
 

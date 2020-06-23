@@ -1,11 +1,11 @@
-package com.sasuke.soundclown.data.model
+package com.sasuke.soundclown.data.model.playlist_tracks
 
 import com.google.gson.annotations.SerializedName
 import com.sasuke.soundclown.data.model.commons.Artist
 import com.sasuke.soundclown.data.model.commons.ExternalUrls
 import com.sasuke.soundclown.data.model.commons.Image
 
-data class ItemAlbum(
+data class PlaylistTrackAlbum(
     @SerializedName("album_type")
     val albumType: String,
     @SerializedName("artists")

@@ -3,9 +3,9 @@ package com.sasuke.soundclown.ui.category_details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sasuke.soundclown.data.model.CustomError
+import com.sasuke.soundclown.data.model.network_models.CustomError
 import com.sasuke.soundclown.data.model.PlaylistResponse
-import com.sasuke.soundclown.data.model.Resource
+import com.sasuke.soundclown.data.model.network_models.Resource
 import com.sasuke.soundclown.data.network.SpotifyRepository
 import javax.inject.Inject
 

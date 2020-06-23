@@ -2,7 +2,8 @@ package com.sasuke.soundclown.util
 
 import com.google.gson.Gson
 import com.sasuke.soundclown.data.exception.NoConnectivityException
-import com.sasuke.soundclown.data.model.CustomError
+import com.sasuke.soundclown.data.model.network_models.CustomError
+import com.sasuke.soundclown.data.model.network_models.Error
 import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
@@ -27,15 +28,27 @@ abstract class ApiCallback<T> : retrofit2.Callback<T> {
         Timber.e(t.cause)
         var error = CustomError()
         if (t is NoConnectivityException) {
-            error = CustomError(com.sasuke.soundclown.data.model.Error(message = t.message!!))
+            error = CustomError(
+                Error(
+                    message = t.message!!
+                )
+            )
             failure(error)
         } else if (t is SSLHandshakeException) {
             error =
-                CustomError(com.sasuke.soundclown.data.model.Error(message = "Internet not working properly"))
+                CustomError(
+                    Error(
+                        message = "Internet not working properly"
+                    )
+                )
             failure(error)
         } else if (t is UnknownHostException) {
             error =
-                CustomError(com.sasuke.soundclown.data.model.Error(message = "Internet not working properly"))
+                CustomError(
+                    Error(
+                        message = "Internet not working properly"
+                    )
+                )
             failure(error)
         } else
             failure(error)
@@ -50,9 +63,19 @@ abstract class ApiCallback<T> : retrofit2.Callback<T> {
                 )
                 failure(error)
             } catch (e: Exception) {
-                failure(CustomError(com.sasuke.soundclown.data.model.Error(message = e.localizedMessage)))
+                failure(
+                    CustomError(
+                        Error(
+                            message = e.localizedMessage
+                        )
+                    )
+                )
             }
-        } ?: run { failure(CustomError(com.sasuke.soundclown.data.model.Error())) }
+        } ?: run { failure(
+            CustomError(
+                Error()
+            )
+        ) }
     }
 
     abstract fun success(response: T)

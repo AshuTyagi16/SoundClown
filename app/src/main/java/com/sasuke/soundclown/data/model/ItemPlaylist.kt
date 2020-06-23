@@ -1,6 +1,8 @@
 package com.sasuke.soundclown.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.sasuke.soundclown.data.model.commons.ExternalUrls
+import com.sasuke.soundclown.data.model.commons.Icon
 
 data class ItemPlaylist(
     @SerializedName("collaborative")

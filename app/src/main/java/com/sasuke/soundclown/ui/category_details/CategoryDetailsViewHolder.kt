@@ -24,7 +24,11 @@ class CategoryDetailsViewHolder(itemView: View, private val glide: RequestManage
 
         itemView.setOnClickListener {
             if (::onCategoryDetailsItemClickListener.isInitialized)
-                onCategoryDetailsItemClickListener.onCategoryDetailsClicked()
+                onCategoryDetailsItemClickListener.onCategoryDetailsClicked(
+                    playlist.id,
+                    playlist.name,
+                    playlist.imageList[0].url
+                )
         }
     }
 
@@ -33,6 +37,10 @@ class CategoryDetailsViewHolder(itemView: View, private val glide: RequestManage
     }
 
     interface OnCategoryDetailsItemClickListener {
-        fun onCategoryDetailsClicked()
+        fun onCategoryDetailsClicked(
+            playlistId: String,
+            playlistName: String,
+            playlistImageUrl: String
+        )
     }
 }

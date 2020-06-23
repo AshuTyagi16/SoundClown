@@ -1,6 +1,7 @@
 package com.sasuke.soundclown.data.network
 
 import com.sasuke.soundclown.data.model.*
+import com.sasuke.soundclown.data.model.playlist_tracks.PlaylistTracksResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,8 +21,11 @@ interface SpotifyService {
     fun getCategoryById(@Path("category_id") categoryId: String): Call<ItemCategories>
 
     @GET("v1/browse/featured-playlists")
-    fun getFeaturedPlaylist():Call<FeaturedPlaylist>
+    fun getFeaturedPlaylist(): Call<FeaturedPlaylist>
 
     @GET("v1/browse/new-releases")
-    fun getNewReleases():Call<NewReleases>
+    fun getNewReleases(): Call<NewReleases>
+
+    @GET("v1/playlists/{playlist_id}/tracks")
+    fun getPlaylistTracksById(@Path("playlist_id") playlistId: String): Call<PlaylistTracksResponse>
 }

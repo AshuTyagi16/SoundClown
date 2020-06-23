@@ -1,11 +1,11 @@
-package com.sasuke.soundclown.data.model
+package com.sasuke.soundclown.data.model.commons
 
 import com.google.gson.annotations.SerializedName
 import com.sasuke.soundclown.data.model.commons.ExternalUrls
 
-data class Owner(
-    @SerializedName("display_name")
-    val displayName: String,
+data class Artist(
+    @SerializedName("name")
+    val name: String,
     @SerializedName("external_urls")
     val externalUrls: ExternalUrls,
     @SerializedName("href")
